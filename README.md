@@ -39,6 +39,13 @@ would be the same as
 
 which can run Mocha unit tests in the watching mode for example.
 
+## Similar projects
+
+* [npm-run](https://www.npmjs.com/package/npm-run) run locally-installed executables to avoid
+  using long string `node node_modules/.bin/some-alias ...`
+* [nrun](https://github.com/2do2go/nrun) is very similar to this project, but the script name
+  completion is done via shell script, see [the relevant issue](https://github.com/2do2go/nrun/issues/3).
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2015
