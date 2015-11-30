@@ -1,8 +1,8 @@
 {
   "name": "npm-quick-run",
-  "version": "1.0.0",
   "description": "Quickly run NPM script by prefix without typing the full name",
   "main": "src/quick-run.js",
+  "version": "0.0.0-semantic-release",
   "bin": {
     "nr": "bin/npm-quick-run.js",
     "nrun": "bin/npm-quick-run.js"
@@ -10,12 +10,13 @@
   "scripts": {
     "test": "mocha src/*-spec.js",
     "commit": "git-issues && commit-wizard",
-    "issues": "git-issues"
+    "issues": "git-issues",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bahmutov/npm-quick-run.git"
+    "url": "https://github.com/bahmutov/npm-quick-run.git"
   },
   "keywords": [
     "npm",
@@ -48,6 +49,7 @@
   "devDependencies": {
     "git-issues": "1.2.0",
     "mocha": "2.3.4",
-    "pre-git": "1.4.0"
+    "pre-git": "1.4.0",
+    "semantic-release": "^4.3.5"
   }
 }
