@@ -39,6 +39,11 @@ would be the same as
 
 which can run Mocha unit tests in the watching mode for example.
 
+## Error handling
+
+If there are no scripts starting with the given prefix, an error message will be shown.
+If there are multiple scripts, they will be printed to the console and an error will be shown.
+
 ## Similar projects
 
 * [npm-run](https://www.npmjs.com/package/npm-run) run locally-installed executables to avoid
