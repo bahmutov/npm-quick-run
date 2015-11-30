@@ -6,6 +6,7 @@
 
 [![Build status][npm-quick-run-ci-image] ][npm-quick-run-ci-url]
 [![semantic-release][semantic-image] ][semantic-url]
+[![manpm](https://img.shields.io/badge/manpm-%E2%9C%93-3399ff.svg)](https://github.com/bahmutov/manpm)
 
 ## Install
 
@@ -25,6 +26,18 @@ For example if you have the following scripts in your `package.json`
 You can quickly run tests using `nr t` and run the linter using `nr l`, assuming there are
 no other script names starting with `t` or `l`. If there are, just be more specific and provide
 more unique prefix.
+
+## Extra arguments
+
+You can pass extra arguments right after the prefix string
+
+    nr t --watch
+
+would be the same as
+
+    npm run test -- --watch
+
+which can run Mocha unit tests in the watching mode for example.
 
 ### Small print
 
