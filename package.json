@@ -8,7 +8,9 @@
     "nrun": "bin/npm-quick-run.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "git-issues && commit-wizard",
+    "issues": "git-issues"
   },
   "preferGlobal": true,
   "repository": {
@@ -31,5 +33,18 @@
   "homepage": "https://github.com/bahmutov/npm-quick-run#readme",
   "dependencies": {
     "simple-bin-help": "1.2.0"
+  },
+  "config": {
+    "pre-git": {
+      "commit-msg": "validate-commit-msg",
+      "pre-commit": [],
+      "pre-push": [],
+      "post-commit": [],
+      "post-merge": []
+    }
+  },
+  "devDependencies": {
+    "git-issues": "1.2.0",
+    "pre-git": "1.4.0"
   }
 }
