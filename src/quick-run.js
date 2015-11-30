@@ -21,7 +21,13 @@ function runPrefix(prefix) {
     console.error('Be more specific');
     process.exit(-1);
   }
-  runNpmCommand('npm run ' + candidates[0]);
+
+  var cmd = 'npm run ' + candidates[0];
+  var extraArguments = process.argv.slice(3);
+  if (extraArguments.length) {
+    cmd += ' -- ' + extraArguments.join(' ');
+  }
+  runNpmCommand(cmd);
 }
 
 module.exports = runPrefix;
