@@ -1,4 +1,5 @@
 const findScripts = require('./find-scripts');
+const runNpmCommand = require('npm-utils').test;
 
 function runPrefix(prefix) {
   console.log('running prefix', prefix);
@@ -20,6 +21,7 @@ function runPrefix(prefix) {
     console.error('Be more specific');
     process.exit(-1);
   }
+  runNpmCommand('npm run ' + candidates[0]);
 }
 
 module.exports = runPrefix;

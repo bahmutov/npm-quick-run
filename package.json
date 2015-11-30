@@ -33,6 +33,7 @@
   },
   "homepage": "https://github.com/bahmutov/npm-quick-run#readme",
   "dependencies": {
+    "npm-utils": "0.4.0",
     "simple-bin-help": "1.2.0"
   },
   "config": {
