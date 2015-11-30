@@ -2,13 +2,13 @@
   "name": "npm-quick-run",
   "version": "1.0.0",
   "description": "Quickly run NPM script by prefix without typing the full name",
-  "main": "index.js",
+  "main": "src/quick-run.js",
   "bin": {
     "nr": "bin/npm-quick-run.js",
     "nrun": "bin/npm-quick-run.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha src/*-spec.js",
     "commit": "git-issues && commit-wizard",
     "issues": "git-issues"
   },
@@ -37,7 +37,9 @@
   "config": {
     "pre-git": {
       "commit-msg": "validate-commit-msg",
-      "pre-commit": [],
+      "pre-commit": [
+        "npm test"
+      ],
       "pre-push": [],
       "post-commit": [],
       "post-merge": []
@@ -45,6 +47,7 @@
   },
   "devDependencies": {
     "git-issues": "1.2.0",
+    "mocha": "2.3.4",
     "pre-git": "1.4.0"
   }
 }
