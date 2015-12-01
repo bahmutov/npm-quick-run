@@ -3,6 +3,7 @@ describe('find-scripts', function () {
   const scripts = {
     foo: 'foo',
     bar: 'bar',
+    barMore: 'bar-more',
     baz: 'baz'
   };
 
@@ -30,9 +31,16 @@ describe('find-scripts', function () {
     console.assert(found[0] === 'foo');
   });
 
-  it('finds 2', function () {
+  it('finds several', function () {
     const found = find('b', scripts);
     console.assert(Array.isArray(found));
-    console.assert(found.length === 2);
+    console.assert(found.length === 3);
+  });
+
+  it('finds an exact match if possible', function () {
+    const found = find('bar', scripts);
+    console.assert(Array.isArray(found));
+    console.assert(found.length === 1, found);
+    console.assert(found[0] === 'bar');
   });
 });
