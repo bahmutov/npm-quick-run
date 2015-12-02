@@ -17,6 +17,12 @@ Install as a global tool `npm install -g npm-quick-run`. This creates two aliase
     $ nr t      # runs script starting with "t"
     $ nr m -w   # runs a script starting with "m", probably "npm run mocha -- -w"
 
+## Demo
+
+Watch this screencast to see `npm-quick-run` in action. I am using `nr` alias
+
+[![demo](https://asciinema.org/a/31015.png)](https://asciinema.org/a/31015)
+
 ## Details
 
 Take a look at the scripts inside your `package.json`. You probably have something like
