@@ -12,9 +12,15 @@
 
 Install as a global tool `npm install -g npm-quick-run`. This creates two aliases `nrun` and `nr`
 
-## Use inside your module's folder
+## Use example
 
-For example if you have the following scripts in your `package.json`
+    $ nr t      # runs script starting with "t"
+    $ nr m -w   # runs a script starting with "m", probably "npm run mocha -- -w"
+
+## Details
+
+Take a look at the scripts inside your `package.json`. You probably have something like
+this
 
 ```json
 "scripts": {
