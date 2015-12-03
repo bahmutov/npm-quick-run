@@ -64,6 +64,13 @@ If there are multiple scripts, they will be printed to the console and an error 
 * [nrun](https://github.com/2do2go/nrun) is very similar to this project, but the script name
   completion is done via shell script, see [the relevant issue](https://github.com/2do2go/nrun/issues/3).
 
+### Benefits compared to similar projects
+
+* `npm-quick-run` is cross platform - the command completion is done in JS
+* Boilerplate NPM error output is filtered out automatically
+* Most commands require typing only 3 characters - 2 for the tool itself "nr" and 1 character for the
+the script label
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2015
