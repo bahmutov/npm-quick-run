@@ -5,6 +5,27 @@ function printAllScripts(pkg) {
   console.error('Available scripts are', Object.keys(pkg.scripts).join(', '));
 }
 
+const npmErrorLoggers = {
+  errorOutput: '',
+  npmErrorStarted: false,
+  stdout: function (str) {
+    process.stdout.write(str);
+  },
+  stderr: function (str) {
+    if (npmErrorLoggers.npmErrorStarted) {
+      return;
+    }
+    npmErrorLoggers.errorOutput += str;
+    if (/npm ERR/.test(npmErrorLoggers.errorOutput)) {
+      npmErrorLoggers.npmErrorStarted = true;
+      process.stderr.write('\n');
+      return;
+    }
+    // TODO buffer by line
+    process.stderr.write(str);
+  }
+}
+
 function runPrefix(prefix) {
 
   const pkg = require(process.cwd() + '/package.json');
@@ -36,7 +57,11 @@ function runPrefix(prefix) {
   if (extraArguments.length) {
     cmd += ' -- ' + extraArguments.join(' ');
   }
-  runNpmCommand(cmd);
+
+  runNpmCommand(cmd, npmErrorLoggers)
+    .catch(function (result) {
+      process.exit(result.code);
+    });
 }
 
 module.exports = runPrefix;
