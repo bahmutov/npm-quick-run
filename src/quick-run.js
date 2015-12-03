@@ -1,5 +1,7 @@
 const findScripts = require('./find-scripts')
 const runNpmCommand = require('npm-utils').test
+const join = require('path').join
+const exists = require('fs').existsSync
 
 function printAllScripts (pkg) {
   console.error('Available scripts are', Object.keys(pkg.scripts).join(', '))
@@ -27,7 +29,12 @@ const npmErrorLoggers = {
 }
 
 function runPrefix (prefix) {
-  const pkg = require(process.cwd() + '/package.json')
+  const fullPath = join(process.cwd(), 'package.json')
+  if (!exists(fullPath)) {
+    console.error('Cannot find package.json in the current folder')
+    process.exit(-1)
+  }
+  const pkg = require(fullPath)
   if (!pkg.scripts) {
     console.error('Cannot find any scripts in the current package')
     process.exit(-1)
