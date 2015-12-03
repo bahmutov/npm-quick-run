@@ -13,6 +13,9 @@ before_install:
   - npm i -g npm@^2.0.0
 before_script:
   - npm prune
+script:
+  - npm run lint
+  - npm test
 after_success:
   - 'curl -Lo travis_after_all.py https://git.io/travis_after_all'
   - python travis_after_all.py
