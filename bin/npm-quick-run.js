@@ -2,19 +2,24 @@
 
 'use strict';
 
+const quickRun = require('..');
+
 const help = [
-  'use: nrun <npm script prefix> <script arguments>',
-  'for example, run tests with "nrun t"',
-  'or if you have "lint" script run it with "nrun l"'
+  'USE: nrun <npm script prefix> <script arguments>',
+  '\t"nr t" === "nrun t" === "npm test"',
+  '\t"nr m -w" probably will find "npm run mocha -- --w"'
 ].join('\n');
 
 require('simple-bin-help')({
   minArguments: 3,
   packagePath: __dirname + '/../package.json',
-  help: help
+  help: help,
+  noExit: true,
+  onFail: function () {
+    quickRun();
+    process.exit(0);
+  }
 });
 
 const prefix = process.argv[2];
-
-const quickRun = require('..');
 quickRun(prefix);

@@ -1,8 +1,11 @@
 const findScripts = require('./find-scripts');
 const runNpmCommand = require('npm-utils').test;
 
+function printAllScripts(pkg) {
+  console.error('Available scripts are', Object.keys(pkg.scripts).join(', '));
+}
+
 function runPrefix(prefix) {
-  console.log('running prefix', prefix);
 
   const pkg = require(process.cwd() + '/package.json');
   if (!pkg.scripts) {
@@ -10,10 +13,16 @@ function runPrefix(prefix) {
     process.exit(-1);
   }
 
+  if (!prefix) {
+    printAllScripts(pkg);
+    return;
+  }
+  console.log('running command with prefix "' + prefix + '"');
+
   const candidates = findScripts(prefix, pkg.scripts);
   if (!candidates.length) {
     console.error('Cannot find any scripts starting with "%s"', prefix);
-    console.error('Available scripts are', Object.keys(pkg.scripts).join(', '));
+    printAllScripts(pkg);
     process.exit(-1);
   }
   if (candidates.length > 1) {
