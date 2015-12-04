@@ -8,7 +8,7 @@
     "nrun": "bin/npm-quick-run.js"
   },
   "scripts": {
-    "test": "mocha src/*-spec.js",
+    "test": "mocha --harmony src/*-spec.js",
     "commit": "git-issues && commit-wizard",
     "issues": "git-issues",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",

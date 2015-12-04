@@ -2,10 +2,7 @@ const findScripts = require('./find-scripts')
 const runNpmCommand = require('npm-utils').test
 const join = require('path').join
 const findup = require('findup')
-
-function printNames (label, names) {
-  console.error(label, names.sort().join(', '))
-}
+const printNames = require('./print-names')
 
 function printAllScripts (pkg) {
   printNames('Available scripts are',
