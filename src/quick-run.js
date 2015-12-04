@@ -3,8 +3,13 @@ const runNpmCommand = require('npm-utils').test
 const join = require('path').join
 const findup = require('findup')
 
+function printNames (label, names) {
+  console.error(label, names.join(', '))
+}
+
 function printAllScripts (pkg) {
-  console.error('Available scripts are', Object.keys(pkg.scripts).join(', '))
+  printNames('Available scripts are',
+    Object.keys(pkg.scripts))
 }
 
 const npmErrorLoggers = {
@@ -54,7 +59,8 @@ function runPrefix (prefix) {
     process.exit(-1)
   }
   if (candidates.length > 1) {
-    console.error('Several scripts start with "%s":', prefix, candidates.join(', '))
+    printNames('Several scripts start with ' + '"' + prefix + '"',
+      candidates)
     console.error('Be more specific')
     process.exit(-1)
   }
