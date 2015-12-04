@@ -4,7 +4,7 @@ const join = require('path').join
 const findup = require('findup')
 
 function printNames (label, names) {
-  console.error(label, names.join(', '))
+  console.error(label, names.sort().join(', '))
 }
 
 function printAllScripts (pkg) {
