@@ -9,7 +9,7 @@ function printNames (label, names, log) {
   }
   var sorted = names.sort()
   const joiner = isMany(names) ? '\n - ' : ', '
-  if (isMany) {
+  if (isMany(sorted)) {
     sorted = [''].concat(sorted)
   }
   log(label, sorted.join(joiner))

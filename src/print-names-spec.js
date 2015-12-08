@@ -2,9 +2,18 @@
 describe('print names', () => {
   const printNames = require('./print-names')
 
+  function isString (s) {
+    return typeof s === 'string'
+  }
+
   function singleLine (s) {
-    return typeof s === 'string' &&
+    return isString(s) &&
       s.indexOf('\n') === -1
+  }
+
+  function singleComma (s) {
+    return isString(s) &&
+      s.split(',').length === 2
   }
 
   function joinArguments () {
@@ -15,6 +24,14 @@ describe('print names', () => {
     function checkOutput () {
       const str = joinArguments.apply(null, arguments)
       console.assert(singleLine(str), str)
+    }
+    printNames('few', ['foo', 'bar'], checkOutput)
+  })
+
+  it('only has single comma', () => {
+    function checkOutput () {
+      const str = joinArguments.apply(null, arguments)
+      console.assert(singleComma(str), str)
     }
     printNames('few', ['foo', 'bar'], checkOutput)
   })
