@@ -59,10 +59,12 @@ If there are multiple scripts, they will be printed to the console and an error 
 
 ## Similar projects
 
+* [json-package](https://github.com/bahmutov/json-package) quickly shows value from `package.json`
+  by property name prefix
 * [npm-run](https://www.npmjs.com/package/npm-run) run locally-installed executables to avoid
   using long string `node node_modules/.bin/some-alias ...`
 * [nrun](https://github.com/2do2go/nrun) is very similar to this project, but the script name
-  completion is done via shell script, see [the relevant issue](https://github.com/2do2go/nrun/issues/3).
+  completion is done via shell script, see [the relevant issue](https://github.com/2do2go/nrun/issues/3)
 
 ### Benefits compared to similar projects
 

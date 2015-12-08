@@ -30,7 +30,8 @@ const npmErrorLoggers = {
   }
 }
 
-function runPrefix (prefix) {
+// TODO replace with json-package implementation
+function findPackage () {
   try {
     var fullPath = findup.sync(process.cwd(), 'package.json')
   } catch (e) {
@@ -38,6 +39,18 @@ function runPrefix (prefix) {
     process.exit(-1)
   }
   const pkg = require(join(fullPath, 'package.json'))
+  return pkg
+}
+
+function loadJson (filename) {
+  if (!filename) {
+    return findPackage()
+  }
+  return require(filename)
+}
+
+function runPrefix (prefix) {
+  const pkg = loadJson()
   if (!pkg.scripts) {
     console.error('Cannot find any scripts in the current package')
     process.exit(-1)

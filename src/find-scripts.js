@@ -1,3 +1,4 @@
+// TODO use code from json-package
 function startsWith (prefix, str) {
   console.assert(typeof str === 'string', 'expected string', str)
   return str.indexOf(prefix) === 0
