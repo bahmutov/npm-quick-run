@@ -7,7 +7,7 @@ notifications:
   email: false
 node_js:
   - '5'
-  - '4'
+  - '4.2.2'
   - '0.12'
 before_install:
   - npm i -g npm@^2.0.0
@@ -17,9 +17,6 @@ script:
   - npm run lint
   - npm test
 after_success:
-  - 'curl -Lo travis_after_all.py https://git.io/travis_after_all'
-  - python travis_after_all.py
-  - 'export $(cat .to_export_back) &> /dev/null'
   - npm run semantic-release
 branches:
   except:
