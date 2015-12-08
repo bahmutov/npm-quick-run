@@ -1,8 +1,8 @@
-const findScripts = require('./find-scripts')
+const findScripts = require('json-package').find
 const runNpmCommand = require('npm-utils').test
 const join = require('path').join
 const findup = require('findup')
-const printNames = require('./print-names')
+const printNames = require('json-package').printNames
 
 function printAllScripts (pkg) {
   printNames('Available scripts are',
