@@ -1,10 +1,10 @@
-#!/usr/bin/env node --harmony
+#!/usr/bin/env node
 
 'use strict'
 
-const quickRun = require('..')
+var quickRun = require('..')
 
-const help = [
+var help = [
   'USE: nrun <npm script prefix> <script arguments>',
   '\t"nr t" === "nrun t" === "npm test"',
   '\t"nr m -w" probably will find "npm run mocha -- --w"'
@@ -21,5 +21,5 @@ require('simple-bin-help')({
   }
 })
 
-const prefix = process.argv[2]
+var prefix = process.argv[2]
 quickRun(prefix)
