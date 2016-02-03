@@ -13,7 +13,8 @@
     "issues": "git-issues",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "error": "echo \"an error on purpose\" && exit -1",
-    "lint": "eslint bin/*.js src/*.js"
+    "lint": "eslint bin/*.js src/*.js",
+    "example": "node bin/npm-quick-run.js li"
   },
   "preferGlobal": true,
   "repository": {
@@ -45,7 +46,8 @@
       "commit-msg": "validate-commit-msg",
       "pre-commit": [
         "npm run lint",
-        "npm test"
+        "npm test",
+        "npm run example"
       ],
       "pre-push": [],
       "post-commit": [],

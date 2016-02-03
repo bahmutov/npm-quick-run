@@ -16,6 +16,7 @@ before_script:
 script:
   - npm run lint
   - npm test
+  - npm run example
 after_success:
   - npm run semantic-release
 branches:
