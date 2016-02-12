@@ -59,6 +59,7 @@ If there are multiple scripts, they will be printed to the console and an error 
 
 ## Similar projects
 
+* [as-a](https://github.com/bahmutov/as-a) adds env variables before running a command
 * [json-package](https://github.com/bahmutov/json-package) quickly shows value from `package.json`
   by property name prefix
 * [npm-run](https://www.npmjs.com/package/npm-run) run locally-installed executables to avoid
