@@ -8,6 +8,7 @@
     "nrun": "bin/npm-quick-run.js"
   },
   "scripts": {
+    "pretest": "npm run lint",
     "test": "mocha --harmony src/*-spec.js",
     "commit": "git-issues && commit-wizard",
     "issues": "git-issues",
@@ -15,7 +16,8 @@
     "error": "echo \"an error on purpose\" && exit -1",
     "lint": "standard bin/*.js src/*.js",
     "example": "node bin/npm-quick-run.js li",
-    "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";"
+    "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";",
+    "test-foo": "node -e \"console.assert(process.argv[1] === 'foo bar', process.argv)\""
   },
   "files": [
     "bin",
@@ -52,9 +54,9 @@
     "pre-git": {
       "commit-msg": "simple",
       "pre-commit": [
-        "npm run lint",
         "npm test",
-        "npm run example"
+        "npm run example",
+        "node bin/npm-quick-run.js test-foo 'foo bar'"
       ],
       "pre-push": [
         "npm run size"

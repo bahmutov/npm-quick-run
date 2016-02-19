@@ -14,9 +14,9 @@ before_install:
 before_script:
   - npm prune
 script:
-  - npm run lint
   - npm test
   - npm run example
+  - node bin/npm-quick-run.js test-foo 'foo bar'
 after_success:
   - npm run semantic-release
 branches:
