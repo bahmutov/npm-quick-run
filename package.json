@@ -14,8 +14,14 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "error": "echo \"an error on purpose\" && exit -1",
     "lint": "standard bin/*.js src/*.js",
-    "example": "node bin/npm-quick-run.js li"
+    "example": "node bin/npm-quick-run.js li",
+    "size": "t=\"$(npm pack .)\"; wc -c \"${t}\"; tar tvf \"${t}\"; rm \"${t}\";"
   },
+  "files": [
+    "bin",
+    "src/*.js",
+    "!src/*-spec.js"
+  ],
   "preferGlobal": true,
   "repository": {
     "type": "git",
@@ -50,7 +56,9 @@
         "npm test",
         "npm run example"
       ],
-      "pre-push": [],
+      "pre-push": [
+        "npm run size"
+      ],
       "post-commit": [],
       "post-merge": []
     }
