@@ -74,6 +74,13 @@ If there are multiple scripts, they will be printed to the console and an error 
 * Most commands require typing only 3 characters - 2 for the tool itself "nr" and 1 character for the
 the script label
 
+## Debug
+
+If something is not working as expected, you can see the verbose debug messages
+by running
+
+    DEBUG=quick nr ...
+
 ### Small print
 
 Author: Gleb Bahmutov &copy; 2015

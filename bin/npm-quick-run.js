@@ -2,6 +2,7 @@
 
 'use strict'
 
+var debug = require('debug')('quick')
 var quickRun = require('..')
 
 var help = [
@@ -21,5 +22,6 @@ require('simple-bin-help')({
   }
 })
 
+debug('arguments %d', process.argv.length, process.argv)
 var prefix = process.argv[2]
 quickRun(prefix)

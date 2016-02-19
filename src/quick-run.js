@@ -1,3 +1,4 @@
+const debug = require('debug')('quick')
 const findScripts = require('json-package').find
 const runNpmCommand = require('npm-utils').test
 const join = require('path').join
@@ -80,6 +81,7 @@ function runPrefix (prefix) {
   if (extraArguments.length) {
     cmd += ' -- ' + extraArguments.join(' ')
   }
+  debug('formed command "%s"', cmd)
 
   runNpmCommand(cmd, npmErrorLoggers)
     .catch(function (result) {
