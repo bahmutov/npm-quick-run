@@ -1,9 +1,9 @@
 const debug = require('debug')('quick')
 const findScripts = require('json-package').find
-const runNpmCommand = require('npm-utils').test
 const join = require('path').join
 const findup = require('findup')
 const printNames = require('json-package').printNames
+const run = require('./run')
 
 function printAllScripts (pkg) {
   printNames('Available scripts are',
@@ -76,14 +76,11 @@ function runPrefix (prefix) {
     process.exit(-1)
   }
 
-  var cmd = 'npm run ' + candidates[0]
-  var extraArguments = process.argv.slice(3)
-  if (extraArguments.length) {
-    cmd += ' -- ' + extraArguments.join(' ')
-  }
-  debug('formed command "%s"', cmd)
+  debug('all arguments', process.argv)
+  var extraArguments = ['run', candidates[0], '--'].concat(process.argv.slice(3))
+  debug('formed command: npm', extraArguments)
 
-  runNpmCommand(cmd, npmErrorLoggers)
+  run('npm', extraArguments)
     .catch(function (result) {
       process.exit(result.code)
     })
