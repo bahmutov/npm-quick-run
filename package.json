@@ -22,7 +22,8 @@
   "files": [
     "bin",
     "src/*.js",
-    "!src/*-spec.js"
+    "!src/*-spec.js",
+    "README.md"
   ],
   "preferGlobal": true,
   "repository": {
