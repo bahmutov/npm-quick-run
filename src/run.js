@@ -1,4 +1,4 @@
-var spawn = require('cross-spawn-async')
+var spawn = require('cross-spawn')
 var Promise = require('bluebird')
 
 function runner (app, parts) {
