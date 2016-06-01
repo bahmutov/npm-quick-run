@@ -46,7 +46,7 @@
   "homepage": "https://github.com/bahmutov/npm-quick-run#readme",
   "dependencies": {
     "bluebird": "3.3.1",
-    "cross-spawn-async": "2.1.8",
+    "cross-spawn": "4.0.0",
     "debug": "2.2.0",
     "findup": "0.1.5",
     "json-package": "1.1.2",
