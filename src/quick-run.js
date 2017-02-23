@@ -6,7 +6,10 @@ const printNames = require('json-package').printNames
 const run = require('./run')
 
 function printAllScripts (pkg) {
-  var names = Object.keys(pkg.scripts).map(function (k) { return k + '\n   ' + pkg.scripts[k] })
+  var names = Object.keys(pkg.scripts)
+    .map(function (k) {
+      return k + '\n     ' + pkg.scripts[k]
+    })
 
   printNames('Available scripts are', names)
 }
