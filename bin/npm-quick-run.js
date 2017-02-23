@@ -4,6 +4,7 @@
 
 var debug = require('debug')('quick')
 var quickRun = require('..')
+var join = require('path').join
 
 var help = [
   'USE: nrun <npm script prefix> <script arguments>',
@@ -13,7 +14,7 @@ var help = [
 
 require('simple-bin-help')({
   minArguments: 3,
-  packagePath: __dirname + '/../package.json',
+  packagePath: join(__dirname, '..', 'package.json'),
   help: help,
   noExit: true,
   onFail: function () {
