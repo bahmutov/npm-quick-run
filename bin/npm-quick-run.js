@@ -13,7 +13,7 @@ var help = [
 ].join('\n')
 
 require('simple-bin-help')({
-  minArguments: 3,
+  minArguments: 2,
   packagePath: join(__dirname, '..', 'package.json'),
   help: help,
   noExit: true,

@@ -2,16 +2,42 @@ const debug = require('debug')('quick')
 const findScripts = require('json-package').find
 const join = require('path').join
 const findup = require('findup')
+const inquirer = require('inquirer')
+const fuzzy = require('fuzzy')
+const chalk = require('chalk')
+const inquirerAutocompletePrompt = require('inquirer-autocomplete-prompt')
 const printNames = require('json-package').printNames
 const run = require('./run')
 
-function printAllScripts (pkg) {
-  var names = Object.keys(pkg.scripts)
-    .map(function (k) {
-      return k + '\n     ' + pkg.scripts[k]
-    })
+inquirer.registerPrompt('autocomplete', inquirerAutocompletePrompt)
 
-  printNames('Available scripts are', names)
+function inquireScript (pkg) {
+  var choices = Object.keys(pkg.scripts).map(function (k) {
+    return {
+      name: chalk.bold.cyan(k) + ' ' + chalk.gray(pkg.scripts[k]),
+      value: k,
+      short: k
+    }
+  })
+
+  return inquirer.prompt([{
+    type: 'autocomplete',
+    name: 'script',
+    message: 'What script do you want to execute?',
+    choices: choices,
+    source: function source (answers, input) {
+      input = input || ''
+      return new Promise(function (resolve) {
+        const fuzzyResult = fuzzy.filter(input, choices, {
+          extract: function (el) { return el.value }
+        })
+
+        resolve(fuzzyResult.map(function (el) {
+          return el.original
+        }))
+      })
+    }
+  }])
 }
 
 const npmErrorLoggers = {
@@ -62,7 +88,7 @@ function runPrefix (prefix) {
   }
 
   if (!prefix) {
-    printAllScripts(pkg)
+    inquireScript(pkg)
     return
   }
   console.log('running command with prefix "' + prefix + '"')
@@ -70,7 +96,7 @@ function runPrefix (prefix) {
   const candidates = findScripts(prefix, pkg.scripts)
   if (!candidates.length) {
     console.error('Cannot find any scripts starting with "%s"', prefix)
-    printAllScripts(pkg)
+    inquireScript(pkg)
     process.exit(-1)
   }
   if (candidates.length > 1) {
