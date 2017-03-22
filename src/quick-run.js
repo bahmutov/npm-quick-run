@@ -23,21 +23,32 @@ function inquireScript (pkg) {
   return inquirer.prompt([{
     type: 'autocomplete',
     name: 'script',
-    message: 'What script do you want to execute?',
+    message: 'Which script do you want to execute?',
     choices: choices,
     source: function source (answers, input) {
       input = input || ''
       return new Promise(function (resolve) {
         const fuzzyResult = fuzzy.filter(input, choices, {
-          extract: function (el) { return el.value }
+          extract: function extract (el) {
+            return el.value
+          }
         })
 
-        resolve(fuzzyResult.map(function (el) {
+        resolve(fuzzyResult.map(function map (el) {
           return el.original
         }))
       })
     }
   }])
+}
+
+function printAllScripts (pkg) {
+  var names = Object.keys(pkg.scripts)
+    .map(function (k) {
+      return chalk.bold.cyan(k) + ' ' + chalk.gray(pkg.scripts[k])
+    })
+
+  printNames('Available scripts are', names)
 }
 
 const npmErrorLoggers = {
@@ -80,23 +91,13 @@ function loadJson (filename) {
   return require(filename)
 }
 
-function runPrefix (prefix) {
-  const pkg = loadJson()
-  if (!pkg.scripts) {
-    console.error('Cannot find any scripts in the current package')
-    process.exit(-1)
-  }
-
-  if (!prefix) {
-    inquireScript(pkg)
-    return
-  }
+function runScript (prefix, pkg) {
   console.log('running command with prefix "' + prefix + '"')
 
   const candidates = findScripts(prefix, pkg.scripts)
   if (!candidates.length) {
     console.error('Cannot find any scripts starting with "%s"', prefix)
-    inquireScript(pkg)
+    printAllScripts(pkg)
     process.exit(-1)
   }
   if (candidates.length > 1) {
@@ -114,6 +115,28 @@ function runPrefix (prefix) {
     .catch(function (result) {
       process.exit(result.code)
     })
+}
+
+function runPrefix (prefix) {
+  const pkg = loadJson()
+
+  if (prefix === '-i') {
+    inquireScript(pkg)
+      .then(result => runScript(result.script, pkg))
+    return
+  }
+
+  if (!pkg.scripts) {
+    console.error('Cannot find any scripts in the current package')
+    process.exit(-1)
+  }
+
+  if (!prefix) {
+    printAllScripts(pkg)
+    return
+  }
+
+  runScript(prefix, pkg)
 }
 
 module.exports = runPrefix

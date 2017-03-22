@@ -7,13 +7,14 @@ var quickRun = require('..')
 var join = require('path').join
 
 var help = [
-  'USE: nrun <npm script prefix> <script arguments>',
+  'USE: nrun [arguments] <npm script prefix> <script arguments>',
   '\t"nr t" === "nrun t" === "npm test"',
-  '\t"nr m -w" probably will find "npm run mocha -- --w"'
+  '\t"nr m -w" probably will find "npm run mocha -- --w"',
+  '\t"nr -i" launch with interactive mode'
 ].join('\n')
 
 require('simple-bin-help')({
-  minArguments: 2,
+  minArguments: 3,
   packagePath: join(__dirname, '..', 'package.json'),
   help: help,
   noExit: true,
