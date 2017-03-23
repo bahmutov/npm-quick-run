@@ -2,13 +2,50 @@ const debug = require('debug')('quick')
 const findScripts = require('json-package').find
 const join = require('path').join
 const findup = require('findup')
+const inquirer = require('inquirer')
+const fuzzy = require('fuzzy')
+const chalk = require('chalk')
+const inquirerAutocompletePrompt = require('inquirer-autocomplete-prompt')
 const printNames = require('json-package').printNames
 const run = require('./run')
+
+inquirer.registerPrompt('autocomplete', inquirerAutocompletePrompt)
+
+function inquireScript (pkg) {
+  var choices = Object.keys(pkg.scripts).map(function (k) {
+    return {
+      name: chalk.bold.cyan(k) + ' ' + chalk.gray(pkg.scripts[k]),
+      value: k,
+      short: k
+    }
+  })
+
+  return inquirer.prompt([{
+    type: 'autocomplete',
+    name: 'script',
+    message: 'Which script do you want to execute?',
+    choices: choices,
+    source: function source (answers, input) {
+      input = input || ''
+      return new Promise(function (resolve) {
+        const fuzzyResult = fuzzy.filter(input, choices, {
+          extract: function extract (el) {
+            return el.value
+          }
+        })
+
+        resolve(fuzzyResult.map(function map (el) {
+          return el.original
+        }))
+      })
+    }
+  }])
+}
 
 function printAllScripts (pkg) {
   var names = Object.keys(pkg.scripts)
     .map(function (k) {
-      return k + '\n     ' + pkg.scripts[k]
+      return chalk.bold.cyan(k) + ' ' + chalk.gray(pkg.scripts[k])
     })
 
   printNames('Available scripts are', names)
@@ -54,17 +91,7 @@ function loadJson (filename) {
   return require(filename)
 }
 
-function runPrefix (prefix) {
-  const pkg = loadJson()
-  if (!pkg.scripts) {
-    console.error('Cannot find any scripts in the current package')
-    process.exit(-1)
-  }
-
-  if (!prefix) {
-    printAllScripts(pkg)
-    return
-  }
+function runScript (prefix, pkg) {
   console.log('running command with prefix "' + prefix + '"')
 
   const candidates = findScripts(prefix, pkg.scripts)
@@ -88,6 +115,28 @@ function runPrefix (prefix) {
     .catch(function (result) {
       process.exit(result.code)
     })
+}
+
+function runPrefix (prefix) {
+  const pkg = loadJson()
+
+  if (prefix === '-i') {
+    inquireScript(pkg)
+      .then(result => runScript(result.script, pkg))
+    return
+  }
+
+  if (!pkg.scripts) {
+    console.error('Cannot find any scripts in the current package')
+    process.exit(-1)
+  }
+
+  if (!prefix) {
+    printAllScripts(pkg)
+    return
+  }
+
+  runScript(prefix, pkg)
 }
 
 module.exports = runPrefix
