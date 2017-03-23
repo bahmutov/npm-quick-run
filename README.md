@@ -17,12 +17,17 @@ Install as a global tool `npm install -g npm-quick-run`. This creates two aliase
 
     $ nr t      # runs script starting with "t"
     $ nr m -w   # runs a script starting with "m", probably "npm run mocha -- -w"
+    $ nr -i     # runs npm-quick-run in interactive mode
 
 ## Demo
 
 Watch this screencast to see `npm-quick-run` in action. I am using `nr` alias
 
 [![demo](https://asciinema.org/a/31015.png)](https://asciinema.org/a/31015)
+
+### Interactive Mode
+
+![Demo: Interactive Mode](https://cloud.githubusercontent.com/assets/87983/24231500/f791fb04-0fbf-11e7-9fa0-1d0f48efd72f.gif)
 
 ## Details
 
