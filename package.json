@@ -72,23 +72,10 @@
     }
   },
   "devDependencies": {
-    "@semantic-release/condition-travis": "5.0.2",
-    "condition-node-version": "1.3.0",
     "git-issues": "1.3.1",
     "mocha": "3.2.0",
     "pre-git": "3.14.0",
     "semantic-release": "6.3.6",
     "standard": "8.6.0"
-  },
-  "release": {
-    "verifyConditions": [
-      {
-        "path": "@semantic-release/condition-travis"
-      },
-      {
-        "path": "condition-node-version",
-        "node": "4.2.2"
-      }
-    ]
   }
 }
