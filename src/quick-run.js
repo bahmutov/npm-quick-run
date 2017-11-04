@@ -103,7 +103,6 @@ function runScript (prefix, pkg) {
   if (candidates.length > 1) {
     printNames('Several scripts start with ' + '"' + prefix + '"',
       candidates)
-    console.error('Be more specific')
     process.exit(-1)
   }
 
