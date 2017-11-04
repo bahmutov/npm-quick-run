@@ -9,10 +9,12 @@
   },
   "scripts": {
     "pretest": "npm run lint",
-    "test": "mocha --harmony src/*-spec.js",
+    "unit": "mocha src/*-spec.js",
+    "test": "npm run unit",
     "commit": "git-issues && commit-wizard",
     "issues": "git-issues",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "echo": "echo hello",
     "error": "echo \"an error on purpose\" && exit -1",
     "lint": "standard --verbose --fix bin/*.js src/*.js",
     "example": "node bin/npm-quick-run.js li",
@@ -72,10 +74,12 @@
     }
   },
   "devDependencies": {
+    "execa-wrap": "1.2.1",
     "git-issues": "1.3.1",
     "mocha": "4.0.1",
     "pre-git": "3.16.0",
-    "semantic-release": "6.3.6",
+    "semantic-release": "8.2.3",
+    "snap-shot-it": "4.0.1",
     "standard": "10.0.3"
   },
   "release": {

@@ -6,13 +6,14 @@ cache:
 notifications:
   email: true
 node_js:
-  - '6'
+  - '8'
 before_script:
   - npm prune
 script:
   - npm test
   - npm run example
   - node bin/npm-quick-run.js test-foo 'foo bar'
+  - node bin/npm-quick-run.js echo
 after_success:
   - npm run semantic-release
 branches:
