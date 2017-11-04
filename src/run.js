@@ -1,6 +1,10 @@
 var spawn = require('cross-spawn')
 var Promise = require('bluebird')
 
+function formHumanCommand (app, parts) {
+  return app + ' ' + parts.join(' ')
+}
+
 function runner (app, parts) {
   return new Promise(function (resolve, reject) {
     var npm = spawn(app, parts, { stdio: 'inherit' })
@@ -13,11 +17,12 @@ function runner (app, parts) {
 
     npm.on('exit', function (code) {
       if (code) {
-        reject({
-          code: code,
-          errors: testErrors
-        })
-        return
+        const command = formHumanCommand(app, parts)
+        const msg = 'NPM command ' + command + ' failed with code ' + code
+        console.error(msg)
+        console.error(testErrors)
+        const e = new Error(msg)
+        return reject(e)
       }
       resolve()
     })

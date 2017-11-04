@@ -76,7 +76,7 @@
     "mocha": "4.0.1",
     "pre-git": "3.16.0",
     "semantic-release": "6.3.6",
-    "standard": "8.6.0"
+    "standard": "10.0.3"
   },
   "release": {
     "analyzeCommits": "simple-commit-message"
