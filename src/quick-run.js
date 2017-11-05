@@ -100,11 +100,6 @@ function runScript (prefix, pkg) {
     printAllScripts(pkg)
     process.exit(-1)
   }
-  if (candidates.length > 1) {
-    printNames('Several scripts start with ' + '"' + prefix + '"',
-      candidates)
-    process.exit(-1)
-  }
 
   debug('all arguments', process.argv)
   var extraArguments = ['run', candidates[0], '--'].concat(process.argv.slice(3))
