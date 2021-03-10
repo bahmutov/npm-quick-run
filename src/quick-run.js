@@ -12,7 +12,7 @@ const run = require('./run')
 inquirer.registerPrompt('autocomplete', inquirerAutocompletePrompt)
 
 function inquireScript (pkg) {
-  var choices = Object.keys(pkg.scripts).map(function (k) {
+  const choices = Object.keys(pkg.scripts).map(function (k) {
     return {
       name: chalk.bold.cyan(k) + ' ' + chalk.gray(pkg.scripts[k]),
       value: k,
@@ -43,7 +43,7 @@ function inquireScript (pkg) {
 }
 
 function printAllScripts (pkg) {
-  var names = Object.keys(pkg.scripts)
+  const names = Object.keys(pkg.scripts)
     .map(function (k) {
       return chalk.bold.cyan(k) + ' ' + chalk.gray(pkg.scripts[k])
     })
@@ -94,7 +94,11 @@ function loadJson (filename) {
 function runScript (prefix, pkg) {
   console.log('running command with prefix "' + prefix + '"')
 
-  const candidates = findScripts(prefix, pkg.scripts)
+  const scripts = pkg.scripts
+  debug('scripts %o', scripts)
+  const candidates = findScripts(prefix, scripts)
+  debug('found %d candidate(s) %o', candidates.length, candidates)
+
   if (!candidates.length) {
     console.error('Cannot find any scripts starting with "%s"', prefix)
     printAllScripts(pkg)
@@ -107,7 +111,7 @@ function runScript (prefix, pkg) {
   }
 
   debug('all arguments', process.argv)
-  var extraArguments = ['run', candidates[0], '--'].concat(process.argv.slice(3))
+  const extraArguments = ['run', candidates[0], '--'].concat(process.argv.slice(3))
   debug('formed command: npm', extraArguments)
 
   run('npm', extraArguments)

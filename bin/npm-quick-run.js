@@ -2,11 +2,11 @@
 
 'use strict'
 
-var debug = require('debug')('quick')
-var quickRun = require('..')
-var join = require('path').join
+const debug = require('debug')('quick')
+const quickRun = require('..')
+const join = require('path').join
 
-var help = [
+const help = [
   'USE: nrun [arguments] <npm script prefix> <script arguments>',
   '\t"nr t" === "nrun t" === "npm test"',
   '\t"nr m -w" probably will find "npm run mocha -- --w"',
@@ -25,5 +25,5 @@ require('simple-bin-help')({
 })
 
 debug('arguments %d', process.argv.length, process.argv)
-var prefix = process.argv[2]
+const prefix = process.argv[2]
 quickRun(prefix)
