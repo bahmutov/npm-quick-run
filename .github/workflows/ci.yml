@@ -1,0 +1,26 @@
+name: ci
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - name: Install NPM dependencies 📦
+        uses: bahmutov/npm-install@v1
+
+      - name: Run tests 🧪
+        run: npm test
+
+      - name: Run examples 📊
+        run: |
+          npm run example
+          node bin/npm-quick-run.js test-foo 'foo bar'
+          node bin/npm-quick-run.js echo
+
+      - name: Semantic Release 🚀
+        uses: cycjimmy/semantic-release-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
