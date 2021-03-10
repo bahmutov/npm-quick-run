@@ -14,6 +14,8 @@ jobs:
         run: npm test
 
       - name: Run examples 📊
+        env:
+          DEBUG: quick
         run: |
           npm run example
           node bin/npm-quick-run.js test-foo 'foo bar'
