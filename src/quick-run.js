@@ -94,7 +94,11 @@ function loadJson (filename) {
 function runScript (prefix, pkg) {
   console.log('running command with prefix "' + prefix + '"')
 
-  const candidates = findScripts(prefix, pkg.scripts)
+  const scripts = pkg.scripts
+  debug('scripts %o', scripts)
+  const candidates = findScripts(prefix, scripts)
+  debug('found %d candidate(s) %o', candidates.length, candidates)
+
   if (!candidates.length) {
     console.error('Cannot find any scripts starting with "%s"', prefix)
     printAllScripts(pkg)

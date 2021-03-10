@@ -45,6 +45,41 @@ You can quickly run tests using `nr t` and run the linter using `nr l`, assuming
 no other script names starting with `t` or `l`. If there are, just be more specific and provide
 more unique prefix.
 
+## Separate words
+
+If your scripts have separate words, you can specify prefix for each one. For example, the `package.json` file below has 3 scripts
+
+```json
+{
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:record": "cypress run --record"
+  }
+}
+```
+
+You can quickly open Cypress using
+
+```
+nr c:o
+# same as
+nr c-o
+# same as
+nr cy-open
+```
+
+Characters `:` and `-` are interchangeable and can be used in the prefix or in the script names.
+
+In the above situation
+
+```
+nr c-r
+# returns both "cypress:run" and "cypress:run:record"
+nr c-r-r
+# executes "cypress:run:record"
+```
+
 ## Extra arguments
 
 You can pass extra arguments right after the prefix string

@@ -18,6 +18,9 @@ jobs:
           npm run example
           node bin/npm-quick-run.js test-foo 'foo bar'
           node bin/npm-quick-run.js echo
+          # use prefix search by word
+          node bin/npm-quick-run.js t-f 'foo bar'
+          node bin/npm-quick-run.js t:f 'foo bar'
 
       - name: Semantic Release 🚀
         uses: cycjimmy/semantic-release-action@v2
