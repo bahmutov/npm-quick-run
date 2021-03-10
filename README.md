@@ -4,7 +4,7 @@
 
 [![NPM][npm-quick-run-icon] ][npm-quick-run-url]
 
-[![Build status][npm-quick-run-ci-image] ][npm-quick-run-ci-url]
+[![ci status][ci image]][ci url]
 [![semantic-release][semantic-image] ][semantic-url]
 [![manpm](https://img.shields.io/badge/manpm-%E2%9C%93-3399ff.svg)](https://github.com/bahmutov/manpm)
 [![standard](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
@@ -128,7 +128,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 [npm-quick-run-icon]: https://nodei.co/npm/npm-quick-run.svg?downloads=true
 [npm-quick-run-url]: https://npmjs.org/package/npm-quick-run
-[npm-quick-run-ci-image]: https://travis-ci.org/bahmutov/npm-quick-run.svg?branch=master
-[npm-quick-run-ci-url]: https://travis-ci.org/bahmutov/npm-quick-run
+[ci image]: https://github.com/bahmutov/npm-quick-run/workflows/ci/badge.svg?branch=master
+[ci url]: https://github.com/bahmutov/npm-quick-run/actions
 [semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-url]: https://github.com/semantic-release/semantic-release
