@@ -21,6 +21,8 @@ Install as a global tool `npm install -g npm-quick-run`. This creates two aliase
 
 ## Demo
 
+Watch the video [NPM Quick Run](https://youtu.be/f2uXdCOkJb0)
+
 Watch this screencast to see `npm-quick-run` in action. I am using `nr` alias
 
 [![demo](https://asciinema.org/a/31015.png)](https://asciinema.org/a/31015)
