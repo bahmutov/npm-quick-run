@@ -18,6 +18,10 @@ Install as a global tool `npm install -g npm-quick-run`. This creates two aliase
     $ nr t      # runs script starting with "t"
     $ nr m -w   # runs a script starting with "m", probably "npm run mocha -- -w"
     $ nr -i     # runs npm-quick-run in interactive mode
+    $ nr c-r    # find script that has two+ words
+                # first starts with "c", second with "r"
+    $ nr c-r.   # find script with exactly two words
+                # first starts with "c", second with "r"
 
 ## Demo
 
@@ -80,6 +84,34 @@ nr c-r
 # returns both "cypress:run" and "cypress:run:record"
 nr c-r-r
 # executes "cypress:run:record"
+```
+
+### Separate words with count
+
+Sometimes you want to match a script with one word, but there are multiple two and three word scripts matching the prefix.
+
+```json
+{
+  "scripts": {
+    "cypress": "cypress -help",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:record": "cypress run --record"
+  }
+}
+```
+
+In order to run "cypress" script use prefix with "." at the end:
+
+```
+# same as "npm run cypress"
+$ nr c. # only finds single word starting with "c"
+
+# same as "npm run cypress:open"
+$ nr c-o.
+
+# same as "npm run cypress:run"
+$ nr c-r.
 ```
 
 ## Extra arguments
