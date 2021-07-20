@@ -126,7 +126,7 @@ function runScript (prefix, pkg) {
   const packageManager = getPackageManager()
   const extraArguments = packageManager === 'npm'
     ? ['run', candidates[0], '--'].concat(process.argv.slice(3))
-    : [candidates[0]].concat(process.argv.slice(3))
+    : ['run', candidates[0]].concat(process.argv.slice(3))
 
   debug('formed command: %s %o', packageManager, extraArguments)
 
