@@ -8,6 +8,7 @@ const chalk = require('chalk')
 const inquirerAutocompletePrompt = require('inquirer-autocomplete-prompt')
 const printNames = require('json-package').printNames
 const run = require('./run')
+const statSync = require('fs').statSync
 
 inquirer.registerPrompt('autocomplete', inquirerAutocompletePrompt)
 
@@ -84,6 +85,16 @@ function findPackage () {
   return pkg
 }
 
+function getPackageManager () {
+  try {
+    findup.sync(process.cwd(), 'yarn.lock')
+    return 'yarn'
+  } catch (_) {
+  }
+
+  return 'npm'
+}
+
 function loadJson (filename) {
   if (!filename) {
     return findPackage()
@@ -111,10 +122,15 @@ function runScript (prefix, pkg) {
   }
 
   debug('all arguments', process.argv)
-  const extraArguments = ['run', candidates[0], '--'].concat(process.argv.slice(3))
-  debug('formed command: npm', extraArguments)
 
-  run('npm', extraArguments)
+  const packageManager = getPackageManager()
+  const extraArguments = packageManager === 'npm'
+    ? ['run', candidates[0], '--'].concat(process.argv.slice(3))
+    : [candidates[0]].concat(process.argv.slice(3))
+
+  debug('formed command: %s %o', packageManager, extraArguments)
+
+  run(packageManager, extraArguments)
     .catch(function (result) {
       process.exit(result.code)
     })
@@ -143,3 +159,4 @@ function runPrefix (prefix) {
 }
 
 module.exports = runPrefix
+module.exports.getPackageManager = getPackageManager
