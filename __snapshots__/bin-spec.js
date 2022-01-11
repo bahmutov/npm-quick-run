@@ -19,5 +19,9 @@ exports['quick run bin runs by prefix 1'] = `
 
   hello
   -------
+  stderr:
+  -------
+  
+  -------
 
 `
