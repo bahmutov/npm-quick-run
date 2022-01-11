@@ -22,6 +22,7 @@ function runner (app, parts) {
         console.error(msg)
         console.error(testErrors)
         const e = new Error(msg)
+        e.code = code
         return reject(e)
       }
       resolve()
