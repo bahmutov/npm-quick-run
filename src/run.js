@@ -1,5 +1,4 @@
 const spawn = require('cross-spawn')
-const Promise = require('bluebird')
 
 function formHumanCommand (app, parts) {
   return app + ' ' + parts.join(' ')
