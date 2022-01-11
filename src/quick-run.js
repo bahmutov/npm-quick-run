@@ -74,8 +74,9 @@ const npmErrorLoggers = {
 
 // TODO replace with json-package implementation
 function findPackage () {
+  let fullPath
   try {
-    var fullPath = findup.sync(process.cwd(), 'package.json')
+    fullPath = findup.sync(process.cwd(), 'package.json')
   } catch (e) {
     console.error('Cannot find package.json in the current folder and its ancestors')
     process.exit(-1)
